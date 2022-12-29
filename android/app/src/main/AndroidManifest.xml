@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.datingo">
+    package="com.khalafawy.datingo">
    <application
         android:label="datingo"
         android:name="${applicationName}"
