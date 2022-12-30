@@ -11,12 +11,15 @@ class Location extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.0.w,
-        vertical: 8.0.h,
+    return SingleChildScrollView(
+      child: Container(
+        height: 0.88.sh,
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0.w,
+          vertical: 20.h,
+        ),
+        child: Container(),
       ),
-      child: Container(),
     );
   }
 }

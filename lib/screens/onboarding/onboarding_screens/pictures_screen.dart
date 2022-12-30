@@ -15,53 +15,56 @@ class Pictures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.0.w,
-        vertical: 50.h,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomTextHeader(
-                text: 'Add 2 or More Pictures',
-              ),
-              SizedBox(height: 10.0.h),
-              Row(
-                children: const [
-                  CustomImageContainer(),
-                  CustomImageContainer(),
-                  CustomImageContainer(),
-                ],
-              ),
-              Row(
-                children: const [
-                  CustomImageContainer(),
-                  CustomImageContainer(),
-                  CustomImageContainer(),
-                ],
-              ),
-            ],
-          ),
-           Column(
-            children: [
-              StepProgressIndicator(
-                totalSteps: 6,
-                currentStep: 4,
-                selectedColor: Theme.of(context).primaryColor,
-                unselectedColor: Theme.of(context).colorScheme.secondary,
-              ),
-              SizedBox(height: 10.0.h),
-              CustomButton(
-                tabController: tabController,
-                text: 'NEXT',
-              ),
-            ],
-          ),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        height: 0.88.sh,
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0.w,
+          vertical: 20.h,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextHeader(
+                  text: 'Add 2 or More Pictures',
+                ),
+                SizedBox(height: 10.0.h),
+                Row(
+                  children: const [
+                    CustomImageContainer(),
+                    CustomImageContainer(),
+                    CustomImageContainer(),
+                  ],
+                ),
+                Row(
+                  children: const [
+                    CustomImageContainer(),
+                    CustomImageContainer(),
+                    CustomImageContainer(),
+                  ],
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                StepProgressIndicator(
+                  totalSteps: 6,
+                  currentStep: 4,
+                  selectedColor: Theme.of(context).primaryColor,
+                  unselectedColor: Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(height: 10.0.h),
+                CustomButton(
+                  tabController: tabController,
+                  text: 'NEXT',
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

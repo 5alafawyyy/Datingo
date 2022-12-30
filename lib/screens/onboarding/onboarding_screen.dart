@@ -36,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: const CustomAppBar(
-              title: 'ARROW',
+              title: 'DATINGO',
               hasAction: false,
             ),
             body: TabBarView(

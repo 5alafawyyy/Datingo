@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             title: "DATINGO",
             theme: theme(),
             onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: MatchesScreen.routeName,
+            initialRoute: OnboardingScreen.routeName,
           );
         }),
       ),

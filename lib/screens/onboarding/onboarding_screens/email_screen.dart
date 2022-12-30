@@ -14,41 +14,60 @@ class Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.0.w,
-        vertical: 50.h,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const CustomTextHeader(
-                text: 'What\'s Your Email Address?',
-              ),
-              SizedBox(height: 20.0.h),
-              const CustomTextField(
-                hint: 'ENTER YOUR EMAIL',
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              StepProgressIndicator(
-                totalSteps: 6,
-                currentStep: 1,
-                selectedColor: Theme.of(context).primaryColor,
-                unselectedColor: Theme.of(context).colorScheme.secondary,
-              ),
-              SizedBox(height: 10.0.h),
-              CustomButton(
-                tabController: tabController,
-                text: 'NEXT',
-              ),
-            ],
-          ),
-        ],
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
+    return SingleChildScrollView(
+      child: Container(
+        height: 0.88.sh,
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0.w,
+          vertical: 20.h,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextHeader(
+                  text: 'What\'s Your Email Address?',
+                ),
+                SizedBox(height: 20.0.h),
+                CustomTextField(
+                  hint: 'ENTER YOUR EMAIL',
+                  controller: emailController,
+                ),
+                SizedBox(height: 0.08.sh),
+                const CustomTextHeader(
+                  text: 'Type a Password',
+                ),
+                SizedBox(height: 20.0.h),
+                CustomTextField(
+                  hint: 'ENTER YOUR PASSWORD',
+                  controller: passwordController,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                StepProgressIndicator(
+                  totalSteps: 6,
+                  currentStep: 1,
+                  selectedColor: Theme.of(context).primaryColor,
+                  unselectedColor: Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(height: 10.0.h),
+                CustomButton(
+                  tabController: tabController,
+                  text: 'NEXT',
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -14,41 +14,48 @@ class EmailVerification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.0.w,
-        vertical: 50.h,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              const CustomTextHeader(
-                text: 'Did You Get The Verification Code?',
-              ),
-              SizedBox(height: 20.0.h),
-              const CustomTextField(
-                hint: 'ENTER YOUR CODE',
-              ),
-            ],
-          ),
-           Column(
-            children: [
-              StepProgressIndicator(
-                totalSteps: 6,
-                currentStep: 2,
-                selectedColor: Theme.of(context).primaryColor,
-                unselectedColor: Theme.of(context).colorScheme.secondary,
-              ),
-              SizedBox(height: 10.0.h),
-              CustomButton(
-                tabController: tabController,
-                text: 'NEXT',
-              ),
-            ],
-          ),
-        ],
+    final controller = TextEditingController();
+
+    return SingleChildScrollView(
+      child: Container(
+        height: 0.88.sh,
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0.w,
+          vertical: 20.h,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomTextHeader(
+                  text: 'Did You Get The Verification Code?',
+                ),
+                SizedBox(height: 20.0.h),
+                CustomTextField(
+                  hint: 'ENTER YOUR CODE',
+                  controller: controller,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                StepProgressIndicator(
+                  totalSteps: 6,
+                  currentStep: 2,
+                  selectedColor: Theme.of(context).primaryColor,
+                  unselectedColor: Theme.of(context).colorScheme.secondary,
+                ),
+                SizedBox(height: 10.0.h),
+                CustomButton(
+                  tabController: tabController,
+                  text: 'NEXT',
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

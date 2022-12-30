@@ -44,40 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCBOf-vTtqUXYeS0B4Bq3YH1usnjxmc1Ko',
-    appId: '1:1011468000144:web:9bdc39ac360c3c77c57115',
-    messagingSenderId: '1011468000144',
-    projectId: 'datingo-8aa3d',
-    authDomain: 'datingo-8aa3d.firebaseapp.com',
-    storageBucket: 'datingo-8aa3d.appspot.com',
-    measurementId: 'G-MT360KWN5K',
+    apiKey: 'AIzaSyDl6FOpu2b-_asji7CTXxMjQxyr0KZ_BzY',
+    appId: '1:170364194455:web:62497c29d43fb4969923d2',
+    messagingSenderId: '170364194455',
+    projectId: 'datingo-69e73',
+    authDomain: 'datingo-69e73.firebaseapp.com',
+    storageBucket: 'datingo-69e73.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD5KwOzFjeQcaaZayRUB3X9tG00kuldi30',
-    appId: '1:1011468000144:android:a6bf45cd7ee3aad4c57115',
-    messagingSenderId: '1011468000144',
-    projectId: 'datingo-8aa3d',
-    storageBucket: 'datingo-8aa3d.appspot.com',
+    apiKey: 'AIzaSyAJG-vY5i88hI6clJ3Geh2jm8titCW6QoU',
+    appId: '1:170364194455:android:ad5762e09c5ac4f09923d2',
+    messagingSenderId: '170364194455',
+    projectId: 'datingo-69e73',
+    storageBucket: 'datingo-69e73.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDauV9DOo6eK0_pSnO4CCeTOtw6X1Sy11k',
-    appId: '1:1011468000144:ios:9c705ed62b023488c57115',
-    messagingSenderId: '1011468000144',
-    projectId: 'datingo-8aa3d',
-    storageBucket: 'datingo-8aa3d.appspot.com',
-    iosClientId: '1011468000144-6ac9fpevtbg88hggsjp1eouujuhbes7c.apps.googleusercontent.com',
-    iosBundleId: 'com.example.arrowDatingApp',
+    apiKey: 'AIzaSyAmD2I4IvRyBEYjZG3UZTCEfJErMhm-X8Y',
+    appId: '1:170364194455:ios:97b2c218fe25a1a09923d2',
+    messagingSenderId: '170364194455',
+    projectId: 'datingo-69e73',
+    storageBucket: 'datingo-69e73.appspot.com',
+    iosClientId: '170364194455-lr3c7fmb022apdbpsnsdrgat8p1bdeha.apps.googleusercontent.com',
+    iosBundleId: 'com.khalafawy.datingo',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDauV9DOo6eK0_pSnO4CCeTOtw6X1Sy11k',
-    appId: '1:1011468000144:ios:9c705ed62b023488c57115',
-    messagingSenderId: '1011468000144',
-    projectId: 'datingo-8aa3d',
-    storageBucket: 'datingo-8aa3d.appspot.com',
-    iosClientId: '1011468000144-6ac9fpevtbg88hggsjp1eouujuhbes7c.apps.googleusercontent.com',
-    iosBundleId: 'com.example.arrowDatingApp',
+    apiKey: 'AIzaSyAmD2I4IvRyBEYjZG3UZTCEfJErMhm-X8Y',
+    appId: '1:170364194455:ios:97b2c218fe25a1a09923d2',
+    messagingSenderId: '170364194455',
+    projectId: 'datingo-69e73',
+    storageBucket: 'datingo-69e73.appspot.com',
+    iosClientId: '170364194455-lr3c7fmb022apdbpsnsdrgat8p1bdeha.apps.googleusercontent.com',
+    iosBundleId: 'com.khalafawy.datingo',
   );
 }
