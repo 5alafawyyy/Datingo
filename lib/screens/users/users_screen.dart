@@ -1,7 +1,6 @@
 import 'package:datingo/models/models.dart';
 import 'package:datingo/widgets/choise_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UsersScreen extends StatelessWidget {

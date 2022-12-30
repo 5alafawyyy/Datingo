@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
+import '../../../blocs/images/images_bloc.dart';
 import '../widgets/widgets.dart';
 import '../../../widgets/widgets.dart';
 
@@ -32,19 +34,61 @@ class Pictures extends StatelessWidget {
                   text: 'Add 2 or More Pictures',
                 ),
                 SizedBox(height: 10.0.h),
-                Row(
-                  children: const [
-                    CustomImageContainer(),
-                    CustomImageContainer(),
-                    CustomImageContainer(),
-                  ],
-                ),
-                Row(
-                  children: const [
-                    CustomImageContainer(),
-                    CustomImageContainer(),
-                    CustomImageContainer(),
-                  ],
+                BlocBuilder<ImagesBloc, ImagesState>(
+                  builder: (context, state) {
+                    if (state is ImagesLoading) {
+                      return const CircularProgressIndicator.adaptive();
+                    }
+                    if (state is ImagesLoaded) {
+                      int imagesCount = state.imageUrls.length;
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              (imagesCount > 0)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[0],
+                                    )
+                                  : const CustomImageContainer(),
+                              (imagesCount > 1)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[1],
+                                    )
+                                  : const CustomImageContainer(),
+                              (imagesCount > 2)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[2],
+                                    )
+                                  : const CustomImageContainer(),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              (imagesCount > 3)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[3],
+                                    )
+                                  : const CustomImageContainer(),
+                              (imagesCount > 4)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[4],
+                                    )
+                                  : const CustomImageContainer(),
+                              (imagesCount > 5)
+                                  ? CustomImageContainer(
+                                      imageUrl: state.imageUrls[5],
+                                    )
+                                  : const CustomImageContainer(),
+                            ],
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('Something went wrong!'),
+                      );
+                    }
+                  },
                 ),
               ],
             ),

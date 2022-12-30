@@ -27,6 +27,7 @@ class AuthRepository extends BaseAuthRepository {
         print(e.toString());
       }
     }
+    return null;
   }
 
   @override

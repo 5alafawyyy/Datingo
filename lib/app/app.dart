@@ -1,8 +1,10 @@
 import 'package:datingo/blocs/auth/auth_bloc.dart';
+import 'package:datingo/blocs/images/images_bloc.dart';
 import 'package:datingo/blocs/swipe/swipe_bloc.dart';
 import 'package:datingo/config/app_router.dart';
 import 'package:datingo/config/theme.dart';
 import 'package:datingo/repositories/auth/base_auth_repository.dart';
+import 'package:datingo/repositories/database/database_repository.dart';
 import 'package:datingo/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +33,17 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (_) => SwipeBloc()..add(LoadUsersEvent(users: User.users)),
+            create: (_) => SwipeBloc()
+              ..add(
+                LoadUsersEvent(
+                  users: User.users.where((user) => user.id != 1).toList(),
+                ),
+              ),
+          ),
+          BlocProvider(
+            create: (_) => ImagesBloc(
+              databaseRepository: DatabaseRepository(),
+            )..add(LoadImages(),),
           ),
         ],
         child: ScreenUtilInit(
