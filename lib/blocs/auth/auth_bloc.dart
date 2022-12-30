@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:datingo/repositories/base_auth_repository.dart';
+import 'package:datingo/repositories/auth/base_auth_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;

@@ -1,5 +1,8 @@
+import 'package:datingo/repositories/storage/storage_repository.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CustomImageContainer extends StatelessWidget {
   const CustomImageContainer({super.key});
@@ -24,7 +27,30 @@ class CustomImageContainer extends StatelessWidget {
         child: Align(
           alignment: Alignment.bottomRight,
           child: IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              ImagePicker picker = ImagePicker();
+              final XFile? image = await picker.pickImage(
+                source: ImageSource.gallery,
+              );
+
+              // Check if the image not selected
+              if (image == null) {
+                // ignore: use_build_context_synchronously
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('No image was selected.'),
+                  ),
+                );
+              }
+
+              if (image != null) {
+                if (kDebugMode) {
+                  print('Uploading.......');
+                  print(image.name);
+                }
+                StorageRepository().uploadImage(image);
+              }
+            },
             icon: Icon(
               Icons.add_a_photo_outlined,
               color: Theme.of(context).colorScheme.secondary,

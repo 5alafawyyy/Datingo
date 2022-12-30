@@ -1,4 +1,4 @@
-import 'package:datingo/repositories/auth_repository.dart';
+import 'package:datingo/repositories/auth/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/foundation.dart';
 
