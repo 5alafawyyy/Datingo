@@ -1,6 +1,8 @@
+import 'package:datingo/blocs/auth/auth_bloc.dart';
 import 'package:datingo/blocs/swipe/swipe_bloc.dart';
 import 'package:datingo/config/app_router.dart';
 import 'package:datingo/config/theme.dart';
+import 'package:datingo/repositories/base_auth_repository.dart';
 import 'package:datingo/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,23 +17,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider(
-          create: (_) => SwipeBloc()..add(LoadUsersEvent(users: User.users)),
-        ),
+        RepositoryProvider(
+          create: (context) => AuthRepository(),
+        )
       ],
-      child: ScreenUtilInit(
-        designSize: const Size(360, 690),
-        builder: ((context, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: "DATINGO",
-            theme: theme(),
-            onGenerateRoute: AppRouter.onGenerateRoute,
-            initialRoute: OnboardingScreen.routeName,
-          );
-        }),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => AuthBloc(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (_) => SwipeBloc()..add(LoadUsersEvent(users: User.users)),
+          ),
+        ],
+        child: ScreenUtilInit(
+          designSize: const Size(360, 690),
+          builder: ((context, child) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: "DATINGO",
+              theme: theme(),
+              onGenerateRoute: AppRouter.onGenerateRoute,
+              initialRoute: OnboardingScreen.routeName,
+            );
+          }),
+        ),
       ),
     );
   }
