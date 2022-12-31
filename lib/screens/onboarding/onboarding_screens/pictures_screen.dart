@@ -37,51 +37,31 @@ class Pictures extends StatelessWidget {
                 BlocBuilder<ImagesBloc, ImagesState>(
                   builder: (context, state) {
                     if (state is ImagesLoading) {
-                      return const CircularProgressIndicator.adaptive();
+                      return Center(
+                        child: CircularProgressIndicator.adaptive(
+                          backgroundColor: Theme.of(context).primaryColor,
+                        ),
+                      );
                     }
                     if (state is ImagesLoaded) {
                       int imagesCount = state.imageUrls.length;
-                      return Column(
-                        children: [
-                          Row(
-                            children: [
-                              (imagesCount > 0)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[0],
-                                    )
-                                  : const CustomImageContainer(),
-                              (imagesCount > 1)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[1],
-                                    )
-                                  : const CustomImageContainer(),
-                              (imagesCount > 2)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[2],
-                                    )
-                                  : const CustomImageContainer(),
-                            ],
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height / 2,
+                        child: GridView.builder(
+                          itemCount: 6,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 0.66,
                           ),
-                          Row(
-                            children: [
-                              (imagesCount > 3)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[3],
-                                    )
-                                  : const CustomImageContainer(),
-                              (imagesCount > 4)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[4],
-                                    )
-                                  : const CustomImageContainer(),
-                              (imagesCount > 5)
-                                  ? CustomImageContainer(
-                                      imageUrl: state.imageUrls[5],
-                                    )
-                                  : const CustomImageContainer(),
-                            ],
-                          ),
-                        ],
+                          itemBuilder: ((context, index) {
+                            return (imagesCount > index)
+                                ? CustomImageContainer(
+                                    imageUrl: state.imageUrls[index],
+                                  )
+                                : const CustomImageContainer();
+                          }),
+                        ),
                       );
                     } else {
                       return const Center(

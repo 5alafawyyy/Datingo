@@ -76,7 +76,6 @@ class UserCard extends StatelessWidget {
                           ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
                           children: [
@@ -86,10 +85,30 @@ class UserCard extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
                                   children: [
-                                    UserImage.small(url: user.imageUrls[0]),
-                                    UserImage.small(url: user.imageUrls[0]),
-                                    UserImage.small(url: user.imageUrls[0]),
-                                    UserImage.small(url: user.imageUrls[0]),
+                                    UserImage.small(
+                                      url: user.imageUrls[0],
+                                      height: 55.0,
+                                      width: 55.0,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                    ),
+                                    UserImage.small(
+                                      url: user.imageUrls[0],
+                                      height: 55.0,
+                                      width: 55.0,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                    ),
+                                    UserImage.small(
+                                      url: user.imageUrls[0],
+                                      height: 55.0,
+                                      width: 55.0,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                    ),
+                                    UserImage.small(
+                                      url: user.imageUrls[0],
+                                      height: 55.0,
+                                      width: 55.0,
+                                      margin: const EdgeInsets.only(right: 8.0),
+                                    ),
                                   ],
                                 ),
                               ),

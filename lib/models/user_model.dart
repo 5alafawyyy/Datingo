@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
-  final int id;
+  final String? id;
   final String name;
   final int age;
   final String gender;
@@ -14,7 +14,7 @@ class User extends Equatable {
   final String jobTitle;
   final String location;
   const User({
-   required this.id,
+    required this.id,
     required this.name,
     required this.age,
     required this.gender,
@@ -27,7 +27,7 @@ class User extends Equatable {
 
   static User fromSnapshot(DocumentSnapshot snap) {
     User user = User(
-      id: snap['id'],
+      id: snap.id,
       name: snap['name'],
       age: snap['age'],
       gender: snap['gender'],
@@ -54,7 +54,7 @@ class User extends Equatable {
   }
 
   User copyWith({
-    int? id,
+    String? id,
     String? name,
     int? age,
     String? gender,
@@ -92,7 +92,7 @@ class User extends Equatable {
 
   static List<User> users = const [
     User(
-      id: 1,
+      id: '1',
       name: 'John',
       age: 25,
       gender: 'Male',
@@ -110,7 +110,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 2,
+      id: '2',
       name: 'Tamara',
       age: 30,
       gender: 'Female',
@@ -128,7 +128,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 3,
+      id: '3',
       name: 'Marta',
       age: 35,
       gender: 'Female',
@@ -146,7 +146,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 4,
+      id: '4',
       name: 'Sara',
       age: 30,
       gender: 'Female',
@@ -164,7 +164,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 5,
+      id: '5',
       name: 'Anna',
       age: 35,
       gender: 'Female',
@@ -182,7 +182,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 6,
+      id: '6',
       name: 'Lisa',
       age: 35,
       gender: 'Female',
@@ -200,7 +200,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 7,
+      id: '7',
       name: 'Luisa',
       age: 35,
       gender: 'Female',
@@ -218,7 +218,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 8,
+      id: '8',
       name: 'Sara',
       age: 35,
       gender: 'Female',
@@ -236,7 +236,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 9,
+      id: '9',
       name: 'Andrea',
       age: 35,
       gender: 'Female',
@@ -254,7 +254,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 10,
+      id: '10',
       name: 'Mary',
       age: 35,
       gender: 'Female',
@@ -272,7 +272,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 11,
+      id: '11',
       name: 'Denise',
       age: 35,
       gender: 'Female',
@@ -290,7 +290,7 @@ class User extends Equatable {
       location: 'Milan',
     ),
     User(
-      id: 12,
+      id: '12',
       name: 'Elle',
       age: 35,
       gender: 'Female',
@@ -307,92 +307,6 @@ class User extends Equatable {
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
     ),
-    // User(
-    //   id: 1,
-    //   name: 'Ahmed',
-    //   age: 25,
-    //   imageUrls: [
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4',
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4'
-    //   ],
-    //   interests: [
-    //     'Music',
-    //     'Programming',
-    //     'Football',
-    //   ],
-    //   jobTitle: 'Flutter Developer',
-    //   bio:
-    //       'Flutter Developer Flutter Developer Flutter Developer Flutter Developer Flutter Developer Flutter Developer Flutter Developer Flutter Developer ',
-    // ),
-    // User(
-    //   id: 2,
-    //   name: 'Mohamed',
-    //   age: 26,
-    //   imageUrls: [
-    //     'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4'
-    //   ],
-    //   interests: [
-    //     'Music',
-    //     'Programming',
-    //     'Football',
-    //   ],
-    //   jobTitle: 'Web Developer',
-    //   bio:
-    //       'Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer Web Developer ',
-    // ),
-    // User(
-    //   id: 3,
-    //   name: 'Ramy',
-    //   age: 27,
-    //   imageUrls: [
-    //     'https://images.unsplash.com/photo-1542596768-5d1d21f1cf98?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60',
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4'
-    //   ],
-    //   interests: [
-    //     'Music',
-    //     'Programming',
-    //     'Football',
-    //   ],
-    //   jobTitle: 'Petroleum Engineer',
-    //   bio:
-    //       'Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer',
-    // ),
-    // User(
-    //   id: 4,
-    //   name: 'Samy',
-    //   age: 50,
-    //   imageUrls: [
-    //     'https://images.unsplash.com/photo-1531384441138-2736e62e0919?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4'
-    //   ],
-    //   interests: [
-    //     'Music',
-    //     'Programming',
-    //     'Football',
-    //     'Football',
-    //   ],
-    //   jobTitle: 'Trader',
-    //   bio:
-    //       'Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer ',
-    // ),
-    // User(
-    //   id: 5,
-    //   name: 'Rania',
-    //   age: 20,
-    //   imageUrls: [
-    //     'https://images.unsplash.com/photo-1534614971-6be99a7a3ffd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-    //     'https://avatars.githubusercontent.com/u/54222207?v=4'
-    //   ],
-    //   interests: [
-    //     'Music',
-    //     'Programming',
-    //     'Football',
-    //   ],
-    //   jobTitle: 'Teacher',
-    //   bio:
-    //       'Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer Petroleum Engineer ',
-    // ),
   ];
 
   static fromMap(Map<String, dynamic> map) {}

@@ -14,23 +14,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required AuthRepository authRepository})
       : _authRepository = authRepository,
         super(const AuthState.unknown()) {
+    on<AuthUserChanged>(_onAuthUserChanged);
+
     _userSubscription = _authRepository.user.listen((user) {
       add(AuthUserChanged(user: user!));
     });
   }
 
-  @override
-  Stream<AuthState> mapEventToState(
-    AuthEvent event,
-  ) async* {
-    if (event is AuthUserChanged) {
-      yield* _mapAuthUserChangedToState(event);
-    }
+ 
+
+  FutureOr<void> _onAuthUserChanged(
+      AuthUserChanged event, Emitter<AuthState> emit,) {
+    emit(AuthState.authenticated(user: event.user));
   }
 
-  Stream<AuthState> _mapAuthUserChangedToState(AuthUserChanged event) async* {
-    yield AuthState.authenticated(user: event.user);
-  }
 
   @override
   Future<void> close() {
