@@ -26,6 +26,9 @@ class Biography extends StatelessWidget {
           );
         }
         if (state is OnboardingLoaded) {
+          final TextEditingController bioEditingController =
+              TextEditingController();
+          print(bioEditingController.text);
           return SingleChildScrollView(
             child: Container(
               height: 0.88.sh,
@@ -45,13 +48,29 @@ class Biography extends StatelessWidget {
                       SizedBox(height: 10.0.h),
                       CustomTextField(
                         hint: 'Type Your BIO',
-                        onChanged: (bio) {
+                        // onChanged: (bio) {
+                        //   context.read<OnboardingBloc>().add(
+                        //         UpdateUser(
+                        //           user: state.user.copyWith(bio: bio),
+                        //         ),
+                        //       );
+                        // },
+                        controller: bioEditingController,
+                        onSubmitted: (bio) {
                           context.read<OnboardingBloc>().add(
                                 UpdateUser(
                                   user: state.user.copyWith(bio: bio),
                                 ),
                               );
                         },
+                        // onEditingComplete: () {
+                        //   context.read<OnboardingBloc>().add(
+                        //         UpdateUser(
+                        //           user: state.user
+                        //               .copyWith(bio: bioEditingController.text),
+                        //         ),
+                        //       );
+                        // },
                         keyboardType: TextInputType.text,
                       ),
                       SizedBox(height: 0.08.sh),

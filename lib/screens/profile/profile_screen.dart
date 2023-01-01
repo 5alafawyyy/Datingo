@@ -40,106 +40,130 @@ class ProfileScreen extends StatelessWidget {
         title: 'PROFILE',
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            UserImage.medium(
-              url: user.imageUrls[0],
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  gradient: LinearGradient(
-                    colors: [
-                      Theme.of(context).primaryColor.withOpacity(0.1),
-                      Theme.of(context).primaryColor.withOpacity(0.9),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
+        child: BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, state) {
+            if (state is ProfileLoading) {
+              return Center(
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 40.0),
-                    child: Text(
-                      user.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1!
-                          .copyWith(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              );
+            }
+            if (state is ProfileLoaded) {
+              return Column(
                 children: [
-                  const TitleWithIcon(title: 'Biography', icon: Icons.edit),
-                  Text(
-                    user.bio,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(height: 1.5),
-                  ),
-                  const TitleWithIcon(title: 'Pictures', icon: Icons.edit),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    height: user.imageUrls.isNotEmpty ? 125 : 0,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: user.imageUrls.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 5.0),
-                          child: UserImage.small(
-                            width: 100,
-                            url: user.imageUrls[index],
-                            border: Border.all(
-                              color: Theme.of(context).primaryColor,
-                            ),
+                  const SizedBox(height: 10),
+                  UserImage.medium(
+                    url: state.user.imageUrls[0],
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        gradient: LinearGradient(
+                          colors: [
+                            Theme.of(context).primaryColor.withOpacity(0.1),
+                            Theme.of(context).primaryColor.withOpacity(0.9),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 40.0),
+                          child: Text(
+                            state.user.name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1!
+                                .copyWith(color: Colors.white),
                           ),
-                        );
-                      },
-                    ),
-                  ),
-                  const TitleWithIcon(title: 'Location', icon: Icons.edit),
-                  Text(
-                    user.location,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(height: 1.5),
-                  ),
-                  const TitleWithIcon(title: 'Interest', icon: Icons.edit),
-                  Row(
-                    children: const [
-                      CustomTextContainer(text: 'MUSIC'),
-                      CustomTextContainer(text: 'ECONOMICS'),
-                      CustomTextContainer(text: 'FOOTBALL'),
-                    ],
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      RepositoryProvider.of<AuthRepository>(context).signOut();
-                    },
-                    child: Center(
-                      child: Text(
-                        'Sign Out',
-                        style: Theme.of(context).textTheme.headline5!.copyWith(
-                              color: Theme.of(context).primaryColor,
-                            ),
+                        ),
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const TitleWithIcon(
+                            title: 'Biography', icon: Icons.edit),
+                        Text(
+                          state.user.bio,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(height: 1.5),
+                        ),
+                        const TitleWithIcon(
+                            title: 'Pictures', icon: Icons.edit),
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          height: state.user.imageUrls.isNotEmpty ? 125 : 0,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.user.imageUrls.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 5.0),
+                                child: UserImage.small(
+                                  width: 100,
+                                  url: state.user.imageUrls[index],
+                                  border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const TitleWithIcon(
+                            title: 'Location', icon: Icons.edit),
+                        Text(
+                          state.user.location,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(height: 1.5),
+                        ),
+                        const TitleWithIcon(
+                            title: 'Interest', icon: Icons.edit),
+                        Row(
+                          children: [
+                            CustomTextContainer(text: state.user.interests[0]),
+                            CustomTextContainer(text: state.user.interests[1]),
+                          ],
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            RepositoryProvider.of<AuthRepository>(context)
+                                .signOut();
+                          },
+                          child: Center(
+                            child: Text(
+                              'Sign Out',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
-              ),
-            )
-          ],
+              );
+            } else {
+              return const Center(
+                child: Text('Something went wrong!'),
+              );
+            }
+          },
         ),
       ),
     );

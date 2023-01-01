@@ -25,22 +25,16 @@ class UserCard extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           child: Stack(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(user.imageUrls[0]),
-                    fit: BoxFit.cover,
+              UserImage.large(
+                url: user.imageUrls[0],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 4,
+                    blurRadius: 4,
+                    offset: const Offset(3, 3),
                   ),
-                  borderRadius: BorderRadius.circular(5.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 4,
-                      blurRadius: 4,
-                      offset: const Offset(3, 3),
-                    ),
-                  ],
-                ),
+                ],
               ),
               Container(
                 decoration: BoxDecoration(
@@ -75,60 +69,38 @@ class UserCard extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                     ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 0.72.sw,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    UserImage.small(
-                                      url: user.imageUrls[0],
-                                      height: 55.0,
-                                      width: 55.0,
-                                      margin: const EdgeInsets.only(right: 8.0),
-                                    ),
-                                    UserImage.small(
-                                      url: user.imageUrls[0],
-                                      height: 55.0,
-                                      width: 55.0,
-                                      margin: const EdgeInsets.only(right: 8.0),
-                                    ),
-                                    UserImage.small(
-                                      url: user.imageUrls[0],
-                                      height: 55.0,
-                                      width: 55.0,
-                                      margin: const EdgeInsets.only(right: 8.0),
-                                    ),
-                                    UserImage.small(
-                                      url: user.imageUrls[0],
-                                      height: 55.0,
-                                      width: 55.0,
-                                      margin: const EdgeInsets.only(right: 8.0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          width: 35.r,
-                          height: 35.r,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: Icon(
-                            Icons.info_outline,
-                            size: 25.r,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 55.0.h,
+                      width: 0.82.sw,
+                      child: ListView.builder(
+                        itemCount: user.imageUrls.length,
+                        // physics: const NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return (index < user.imageUrls.length)
+                              ? UserImage.small(
+                                  url: user.imageUrls[index],
+                                  height: 55.0,
+                                  width: 55.0,
+                                  margin: const EdgeInsets.only(
+                                    right: 8.0,
+                                  ),
+                                )
+                              : Container(
+                                  width: 35.r,
+                                  height: 35.r,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Icon(
+                                    Icons.info_outline,
+                                    size: 25.r,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                );
+                        }),
+                      ),
                     ),
                   ],
                 ),

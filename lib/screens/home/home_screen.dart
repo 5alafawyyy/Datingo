@@ -26,8 +26,11 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomAppBar(
         title: 'DISCOVER',
         profileOnPressed: () {
-          Navigator.pushNamed(context, ProfileScreen.routeName,
-              arguments: User.users[0],);
+          Navigator.pushNamed(
+            context,
+            ProfileScreen.routeName,
+            arguments: User.users[0],
+          );
         },
       ),
       body: BlocBuilder<SwipeBloc, SwipeState>(
@@ -39,6 +42,7 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           } else if (state is SwipeLoadedState) {
+            int userCount = state.users.length;
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -53,7 +57,10 @@ class HomeScreen extends StatelessWidget {
                     child: Draggable<User>(
                       data: state.users[0],
                       feedback: UserCard(user: state.users[0]),
-                      childWhenDragging: (state.users.length > 1)
+                      childWhenDragging: 
+                      (userCount > 1)
+                      
+                      
                           ? UserCard(user: state.users[1])
                           : Container(),
                       onDragEnd: ((drag) {
@@ -130,6 +137,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            );
+          } else if (state is SwipeErrorState) {
+            return const Center(
+              child: Text('There aren\'t any more users.'),
             );
           } else {
             return const Center(

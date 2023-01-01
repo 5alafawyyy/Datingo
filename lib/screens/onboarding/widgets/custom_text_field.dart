@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hint;
   final Function(String)? onChanged;
+  final TextEditingController? controller;
+  final void Function()? onEditingComplete;
+  final void Function(String)? onSubmitted;
   final TextInputType? keyboardType;
   const CustomTextField({
     Key? key,
     required this.hint,
+    this.controller,
+    this.onSubmitted,
     this.onChanged,
+    this.onEditingComplete,
     this.keyboardType,
   }) : super(key: key);
 
@@ -29,7 +35,10 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: Colors.white),
         ),
       ),
+      controller: controller,
+      onSubmitted: onSubmitted,
       onChanged: onChanged,
+      onEditingComplete: () {},
       keyboardType: keyboardType,
     );
   }

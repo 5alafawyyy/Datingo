@@ -64,7 +64,7 @@ class Pictures extends StatelessWidget {
                                 : const CustomImageContainer();
                           }),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Column(

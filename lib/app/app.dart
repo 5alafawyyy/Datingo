@@ -1,3 +1,4 @@
+import 'package:datingo/blocs/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +21,13 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(
           create: (context) => AuthRepository(),
-        )
+        ),
+        RepositoryProvider(
+          create: (context) => DatabaseRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => StorageRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -30,12 +37,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => SwipeBloc()
-              ..add(
-                LoadUsers(
-                  users: User.users.where((user) => user.id != 1).toList(),
-                ),
-              ),
+            create: (context) => SwipeBloc(
+              authBloc: context.read<AuthBloc>(),
+              databaseRepository: context.read<DatabaseRepository>(),
+            ),
           ),
           BlocProvider<SignupCubit>(
             create: (context) => SignupCubit(
@@ -44,9 +49,19 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => OnboardingBloc(
-              databaseRepository: DatabaseRepository(),
-              storageRepository: StorageRepository(),
+              databaseRepository: context.read<DatabaseRepository>(),
+              storageRepository: context.read<StorageRepository>(),
             ),
+          ),
+          BlocProvider(
+            create: (context) => ProfileBloc(
+              authBloc: context.read<AuthBloc>(),
+              databaseRepository: context.read<DatabaseRepository>(),
+            )..add(
+                LoadProfile(
+                  userId: context.read<AuthBloc>().state.user!.uid,
+                ),
+              ),
           ),
         ],
         child: ScreenUtilInit(
