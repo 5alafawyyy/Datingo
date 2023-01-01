@@ -17,8 +17,6 @@ class Email extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final emailController = TextEditingController();
-    // final passwordController = TextEditingController();
 
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
@@ -47,7 +45,6 @@ class Email extends StatelessWidget {
                           print(state.email);
                         }
                       },
-                      // controller: emailController,
                     ),
                     SizedBox(height: 0.08.sh),
                     const CustomTextHeader(
@@ -62,7 +59,6 @@ class Email extends StatelessWidget {
                           print(state.password);
                         }
                       },
-                      // controller: passwordController,
                     ),
                   ],
                 ),
@@ -78,8 +74,6 @@ class Email extends StatelessWidget {
                     CustomButton(
                       tabController: tabController,
                       text: 'NEXT',
-                      // emailController: emailController,
-                      // passwordController: passwordController,
                     ),
                   ],
                 ),

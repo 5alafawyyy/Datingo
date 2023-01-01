@@ -14,10 +14,10 @@ class AppRouter {
       print(settings);
     }
     switch (settings.name) {
-      case HomeScreen.routeName:
-        return HomeScreen.route();
       case SplashScreen.routeName:
         return SplashScreen.route();
+      case HomeScreen.routeName:
+        return HomeScreen.route();
       case UsersScreen.routeName:
         return UsersScreen.route(user: settings.arguments as User);
       case OnboardingScreen.routeName:

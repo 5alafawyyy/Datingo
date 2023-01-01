@@ -5,10 +5,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool hasAction;
+  final void Function()? profileOnPressed;
+  final void Function()? messageOnPressed;
+
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasAction = true,
+    this.profileOnPressed,
+    this.messageOnPressed,
   }) : super(key: key);
 
   @override
@@ -38,12 +43,12 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: hasAction
           ? [
               IconButton(
-                onPressed: () {},
+                onPressed: messageOnPressed,
                 icon: const Icon(Icons.message),
                 color: Theme.of(context).primaryColor,
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: profileOnPressed,
                 icon: const Icon(Icons.person),
                 color: Theme.of(context).primaryColor,
               ),

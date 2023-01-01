@@ -1,6 +1,8 @@
+import 'package:datingo/blocs/blocs.dart';
 import 'package:datingo/cubits/signup/signup_cubit.dart';
+import 'package:datingo/models/models.dart';
+import 'package:datingo/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
@@ -33,9 +35,35 @@ class CustomButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () async {
-            tabController.animateTo(tabController.index + 1);
+            if (tabController.index == 5) {
+              Navigator.pushNamed(
+                context,
+                HomeScreen.routeName,
+              );
+              
+            }else{
+              tabController.animateTo(tabController.index + 1);
+            }
             if (tabController.index == 2) {
-              context.read<SignupCubit>().signupWithCredentials();
+              await context.read<SignupCubit>().signupWithCredentials();
+
+              User user = User(
+                id: context.read<SignupCubit>().state.user!.uid,
+                name: '',
+                age: 0,
+                gender: '',
+                imageUrls: [],
+                interests: [],
+                bio: '',
+                jobTitle: '',
+                location: '',
+              );
+
+              context.read<OnboardingBloc>().add(
+                    StartOnboarding(
+                      user: user,
+                    ),
+                  );
             }
           },
           style: ElevatedButton.styleFrom(

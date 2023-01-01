@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../cubits/cubits.dart';
 import '/blocs/blocs.dart';
 import '/repositories/repositories.dart';
 import '/config/app_router.dart';
@@ -25,24 +25,28 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (_) => AuthBloc(
+            create: (context) => AuthBloc(
               authRepository: context.read<AuthRepository>(),
             ),
           ),
           BlocProvider(
-            create: (_) => SwipeBloc()
+            create: (context) => SwipeBloc()
               ..add(
                 LoadUsers(
                   users: User.users.where((user) => user.id != 1).toList(),
                 ),
               ),
           ),
+          BlocProvider<SignupCubit>(
+            create: (context) => SignupCubit(
+              authRepository: context.read<AuthRepository>(),
+            ),
+          ),
           BlocProvider(
-            create: (_) => ImagesBloc(
+            create: (context) => OnboardingBloc(
               databaseRepository: DatabaseRepository(),
-            )..add(
-                LoadImages(),
-              ),
+              storageRepository: StorageRepository(),
+            ),
           ),
         ],
         child: ScreenUtilInit(
@@ -53,7 +57,7 @@ class MyApp extends StatelessWidget {
               title: "DATINGO",
               theme: theme(),
               onGenerateRoute: AppRouter.onGenerateRoute,
-              initialRoute: OnboardingScreen.routeName,
+              initialRoute: SplashScreen.routeName,
             );
           }),
         ),

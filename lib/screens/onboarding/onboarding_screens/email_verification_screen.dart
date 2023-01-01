@@ -14,8 +14,6 @@ class EmailVerification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController();
-
     return SingleChildScrollView(
       child: Container(
         height: 0.88.sh,
@@ -35,7 +33,13 @@ class EmailVerification extends StatelessWidget {
                 SizedBox(height: 20.0.h),
                 CustomTextField(
                   hint: 'ENTER YOUR CODE',
-                  controller: controller,
+                  onChanged: (code) {
+                    // context.read<OnboardingBloc>().add(
+                    //             UpdateUser(
+                    //               user: state.user.copyWith(gender: 'Female'),
+                    //             ),
+                    //           );
+                  },
                 ),
               ],
             ),

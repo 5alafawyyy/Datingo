@@ -71,7 +71,7 @@ ThemeData theme() {
     // Circular Progress Indicator Theme
     progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: ColorManager.primaryColor,
-      linearTrackColor: ColorManager.secondary,
+      // linearTrackColor: ColorManager.secondary,
     ),
   );
 }

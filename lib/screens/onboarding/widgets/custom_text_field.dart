@@ -2,21 +2,18 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
-  final TextEditingController? controller;
-
   final Function(String)? onChanged;
-
+  final TextInputType? keyboardType;
   const CustomTextField({
     Key? key,
     required this.hint,
     this.onChanged,
-     this.controller,
+    this.keyboardType,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      // controller: controller,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
@@ -33,6 +30,7 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
       onChanged: onChanged,
+      keyboardType: keyboardType,
     );
   }
 }

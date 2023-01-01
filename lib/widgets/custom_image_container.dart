@@ -1,4 +1,4 @@
-import 'package:datingo/repositories/storage/storage_repository.dart';
+import 'package:datingo/blocs/blocs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +53,10 @@ class CustomImageContainer extends StatelessWidget {
                         print('Uploading.......');
                         print(image.name);
                       }
-                      StorageRepository().uploadImage(image);
+                      context.read<OnboardingBloc>()
+                        .add(
+                          UpdateUserImages(image: image),
+                        );
                     }
                   },
                   icon: Icon(

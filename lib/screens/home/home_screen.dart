@@ -1,3 +1,4 @@
+import 'package:datingo/blocs/auth/auth_bloc.dart';
 import 'package:datingo/blocs/swipe/swipe_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'DISCOVER',
+        profileOnPressed: () {
+          Navigator.pushNamed(context, ProfileScreen.routeName,
+              arguments: User.users[0],);
+        },
       ),
       body: BlocBuilder<SwipeBloc, SwipeState>(
         builder: (context, state) {

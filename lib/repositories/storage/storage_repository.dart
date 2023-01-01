@@ -4,6 +4,7 @@ import 'package:datingo/repositories/database/database_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/models.dart';
 import 'base_storage_repository.dart';
 
 class StorageRepository extends BaseStorageRepository {
@@ -11,18 +12,28 @@ class StorageRepository extends BaseStorageRepository {
       firebase_storage.FirebaseStorage.instance;
 
   @override
-  Future<void> uploadImage(XFile image) async {
+  Future<void> uploadImage(User user, XFile image) async {
     try {
-      await storage.ref('user_1/${image.name}').putFile(
+      await storage
+          .ref('${user.id}/${image.name}')
+          .putFile(
             File(image.path),
-          ).then((p0) => DatabaseRepository().updateUserPictures(image.name));
-    } catch (_) {}
+          )
+          .then(
+            (p0) => DatabaseRepository().updateUserPictures(
+              user,
+              image.name,
+            ),
+          );
+    } catch (err) {
+      print(err);
+    }
   }
 
   @override
-  Future<String> getDownloadUrl(String imageName) async {
-    String downloadUrl =
-        await storage.ref('user_1/$imageName').getDownloadURL();
-    return downloadUrl;
+  Future<String> getDownloadURL(User user, String imageName) async {
+    String downloadURL =
+        await storage.ref('${user.id}/$imageName').getDownloadURL();
+    return downloadURL;
   }
 }

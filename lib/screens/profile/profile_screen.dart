@@ -1,6 +1,10 @@
+import 'package:datingo/blocs/blocs.dart';
 import 'package:datingo/models/models.dart';
+import 'package:datingo/screens/onboarding/onboarding_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../repositories/repositories.dart';
 import '../../widgets/widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -9,9 +13,17 @@ class ProfileScreen extends StatelessWidget {
   static Route route({required User user}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: ((context) => ProfileScreen(
-            user: user,
-          )),
+      builder: ((context) {
+        if (kDebugMode) {
+          print(BlocProvider.of<AuthBloc>(context).state.status);
+        }
+        return (BlocProvider.of<AuthBloc>(context).state.status ==
+                AuthStatus.unauthenticated)
+            ? const OnboardingScreen()
+            : ProfileScreen(
+                user: user,
+              );
+      }),
     );
   }
 
@@ -112,14 +124,15 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      RepositoryProvider.of<AuthRepository>(context).signOut();
+                    },
                     child: Center(
                       child: Text(
                         'Sign Out',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: Theme.of(context).primaryColor),
+                        style: Theme.of(context).textTheme.headline5!.copyWith(
+                              color: Theme.of(context).primaryColor,
+                            ),
                       ),
                     ),
                   ),
