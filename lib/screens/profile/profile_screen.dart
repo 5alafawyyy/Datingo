@@ -1,6 +1,7 @@
 import 'package:datingo/blocs/blocs.dart';
 import 'package:datingo/models/models.dart';
 import 'package:datingo/screens/onboarding/onboarding_screen.dart';
+import 'package:datingo/screens/screens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -132,14 +133,21 @@ class ProfileScreen extends StatelessWidget {
                             title: 'Interest', icon: Icons.edit),
                         Row(
                           children: [
-                            CustomTextContainer(text: state.user.interests[0]),
-                            CustomTextContainer(text: state.user.interests[1]),
+                            // CustomTextContainer(text: state.user.interests[0]),
+                            // CustomTextContainer(text: state.user.interests[1]),
                           ],
                         ),
                         TextButton(
                           onPressed: () {
                             RepositoryProvider.of<AuthRepository>(context)
-                                .signOut();
+                                .signOut()
+                                .then((value) {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                LoginScreen.routeName,
+                                ModalRoute.withName(LoginScreen.routeName),
+                              );
+                            });
                           },
                           child: Center(
                             child: Text(

@@ -1,4 +1,3 @@
-import 'package:datingo/blocs/profile/profile_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +7,6 @@ import '/repositories/repositories.dart';
 import '/config/app_router.dart';
 import '/config/theme.dart';
 import '/screens/screens.dart';
-import '/models/models.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp._internal();
@@ -40,6 +38,11 @@ class MyApp extends StatelessWidget {
             create: (context) => SwipeBloc(
               authBloc: context.read<AuthBloc>(),
               databaseRepository: context.read<DatabaseRepository>(),
+            ),
+          ),
+          BlocProvider<LoginCubit>(
+            create: (context) => LoginCubit(
+              authRepository: context.read<AuthRepository>(),
             ),
           ),
           BlocProvider<SignupCubit>(

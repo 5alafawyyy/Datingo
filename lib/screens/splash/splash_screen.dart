@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:datingo/screens/home/home_screen.dart';
-import 'package:datingo/screens/onboarding/onboarding_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../blocs/blocs.dart';
+import '../screens.dart';
 
 class SplashScreen extends StatelessWidget {
   static const String routeName = '/Splash';
@@ -33,15 +32,14 @@ class SplashScreen extends StatelessWidget {
           if (state.status == AuthStatus.unauthenticated) {
             Timer(
               const Duration(seconds: 1),
-              () => Navigator.of(context).pushNamedAndRemoveUntil(
-                OnboardingScreen.routeName,
-                ModalRoute.withName(OnboardingScreen.routeName),
+              () => Navigator.of(context).pushNamed(
+                LoginScreen.routeName,
               ),
             );
           } else if (state.status == AuthStatus.authenticated) {
             Timer(
               const Duration(seconds: 1),
-              () => Navigator.of(context).pushNamed(HomeScreen.routeName),
+              () => Navigator.of(context).pushNamed(LoginScreen.routeName),
             );
           }
         },
