@@ -13,6 +13,10 @@ class User extends Equatable {
   final String bio;
   final String jobTitle;
   final String location;
+  final List<String>? swipeLeft;
+  final List<String>? swipeRight;
+  final List<String>? matches;
+
   const User({
     required this.id,
     required this.name,
@@ -23,6 +27,9 @@ class User extends Equatable {
     required this.bio,
     required this.jobTitle,
     required this.location,
+    this.swipeLeft,
+    this.swipeRight,
+    this.matches,
   });
 
   static User fromSnapshot(DocumentSnapshot snap) {
@@ -36,6 +43,14 @@ class User extends Equatable {
       bio: snap['bio'],
       jobTitle: snap['jobTitle'],
       location: snap['location'],
+      swipeLeft: (snap['swipeLeft'] as List)
+          .map((swipeLeft) => swipeLeft as String)
+          .toList(),
+      swipeRight: (snap['swipeRight'] as List)
+          .map((swipeRight) => swipeRight as String)
+          .toList(),
+      matches:
+          (snap['matches'] as List).map((match) => match as String).toList(),
     );
     return user;
   }
@@ -50,6 +65,9 @@ class User extends Equatable {
       'bio': bio,
       'jobTitle': jobTitle,
       'location': location,
+      'swipeLeft': swipeLeft,
+      'swipeRight': swipeRight,
+      'matches': matches,
     };
   }
 
@@ -63,6 +81,9 @@ class User extends Equatable {
     String? bio,
     String? jobTitle,
     String? location,
+    List<String>? swipeLeft,
+    List<String>? swipeRight,
+    List<String>? matches,
   }) {
     return User(
       id: id ?? this.id,
@@ -74,6 +95,9 @@ class User extends Equatable {
       bio: bio ?? this.bio,
       jobTitle: jobTitle ?? this.jobTitle,
       location: location ?? this.location,
+      swipeLeft: swipeLeft ?? this.swipeLeft,
+      swipeRight: swipeRight ?? this.swipeRight,
+      matches: matches ?? this.matches,
     );
   }
 
@@ -88,6 +112,9 @@ class User extends Equatable {
         bio,
         jobTitle,
         location,
+        swipeLeft,
+        swipeRight,
+        matches,
       ];
 
   static List<User> users = const [
@@ -108,6 +135,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '2',
@@ -126,6 +156,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '3',
@@ -144,6 +177,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '4',
@@ -162,6 +198,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '5',
@@ -180,6 +219,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '6',
@@ -198,6 +240,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '7',
@@ -216,6 +261,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '8',
@@ -234,6 +282,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '9',
@@ -252,6 +303,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '10',
@@ -270,6 +324,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '11',
@@ -288,6 +345,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
     User(
       id: '12',
@@ -306,6 +366,9 @@ class User extends Equatable {
       bio:
           'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
       location: 'Milan',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
   ];
 

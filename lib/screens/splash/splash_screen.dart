@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +38,7 @@ class SplashScreen extends StatelessWidget {
           } else if (state.status == AuthStatus.authenticated) {
             Timer(
               const Duration(seconds: 1),
-              () => Navigator.of(context).pushNamed(LoginScreen.routeName),
+              () => Navigator.of(context).pushNamed(HomeScreen.routeName),
             );
           }
         },

@@ -24,9 +24,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateProfile>(_onUpdateProfile);
 
     _authSubscription = _authBloc.stream.listen((state) {
-      if (state.user is AuthUserChanged) {
-        if (state.user != null) {
-          add(LoadProfile(userId: state.user!.uid));
+      if (state.authUser is AuthUserChanged) {
+        if (state.authUser != null) {
+          add(LoadProfile(userId: state.authUser!.uid));
         }
       }
     });
@@ -56,4 +56,3 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     super.close();
   }
 }
-

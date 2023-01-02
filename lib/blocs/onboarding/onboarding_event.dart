@@ -21,6 +21,9 @@ class StartOnboarding extends OnboardingEvent {
       bio: '',
       jobTitle: '',
       location: '',
+      swipeLeft: [],
+      swipeRight: [],
+      matches: [],
     ),
   });
 

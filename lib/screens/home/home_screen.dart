@@ -1,4 +1,3 @@
-import 'package:datingo/blocs/auth/auth_bloc.dart';
 import 'package:datingo/blocs/swipe/swipe_bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
