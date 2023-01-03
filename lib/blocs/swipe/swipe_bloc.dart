@@ -76,7 +76,7 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
           userId,
           event.user.id!,
         );
-        emit(SwipeLoadedState(users: users));
+        emit(SwipeMatchedState(user: event.user));
       } else if (users.isNotEmpty) {
         emit(SwipeLoadedState(users: users));
       } else {
@@ -88,13 +88,14 @@ class SwipeBloc extends Bloc<SwipeEvent, SwipeState> {
   FutureOr<void> _onSwipeLeft(
     SwipeLeft event,
     Emitter<SwipeState> emit,
-  ) {
+  ) async {
     if (state is SwipeLoadedState) {
       final state = this.state as SwipeLoadedState;
+      String userId = _authBloc.state.authUser!.uid;
       List<User> users = List.from(state.users)..remove(event.user);
 
-      _databaseRepository.updateUserSwipe(
-        _authBloc.state.authUser!.uid,
+      await _databaseRepository.updateUserSwipe(
+        userId,
         event.user.id!,
         false,
       );

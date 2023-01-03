@@ -44,7 +44,13 @@ class LoginScreen extends StatelessWidget {
             SizedBox(height: 10.0.h),
             CustomElevatedButton(
               onPressed: () {
-                context.read<LoginCubit>().loginWithCredentials();
+                context.read<LoginCubit>().loginWithCredentials().then((value) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    HomeScreen.routeName,
+                    (route) => false,
+                  );
+                });
               },
               text: 'LOGIN',
               beginColor: Colors.white,

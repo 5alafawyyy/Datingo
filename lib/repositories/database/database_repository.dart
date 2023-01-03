@@ -38,6 +38,24 @@ class DatabaseRepository extends BaseDatabaseRepository {
   }
 
   @override
+  Stream<List<Match>> getMatches(User user) {
+    List<String> userFilter = List.from(user.matches!)..add('0');
+
+    return _firebaseFirestore
+        .collection('users')
+        .where(FieldPath.documentId, whereIn: userFilter)
+        .snapshots()
+        .map((snap) {
+      return snap.docs
+          .map((doc) => Match.fromSnapshot(
+                doc,
+                user.id!,
+              ))
+          .toList();
+    });
+  }
+
+  @override
   Future<void> createUser(User user) async {
     await _firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
   }

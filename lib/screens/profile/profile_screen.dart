@@ -1,6 +1,5 @@
 import 'package:datingo/blocs/blocs.dart';
 import 'package:datingo/models/models.dart';
-import 'package:datingo/screens/onboarding/onboarding_screen.dart';
 import 'package:datingo/screens/screens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

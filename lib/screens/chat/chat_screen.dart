@@ -7,7 +7,7 @@ import '../screens.dart';
 class ChatScreen extends StatelessWidget {
   static const String routeName = '/Chat';
 
-  static Route route({required UserMatch userMatch}) {
+  static Route route({required Match userMatch}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: ((context) => ChatScreen(
@@ -16,7 +16,7 @@ class ChatScreen extends StatelessWidget {
     );
   }
 
-  final UserMatch userMatch;
+  final Match userMatch;
   const ChatScreen({
     super.key,
     required this.userMatch,

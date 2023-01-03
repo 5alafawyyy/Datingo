@@ -1,19 +1,22 @@
+import 'package:datingo/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../screens/screens.dart';
+
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final bool hasAction;
-  final void Function()? profileOnPressed;
-  final void Function()? messageOnPressed;
+  // final void Function()? profileOnPressed;
+  // final void Function()? messageOnPressed;
 
   const CustomAppBar({
     Key? key,
     required this.title,
     this.hasAction = true,
-    this.profileOnPressed,
-    this.messageOnPressed,
+    // this.profileOnPressed,
+    // this.messageOnPressed,
   }) : super(key: key);
 
   @override
@@ -26,9 +29,18 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       title: Row(
         children: [
           Expanded(
-            child: SvgPicture.asset(
-              'assets/logo.svg',
-              height: 40.h,
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  HomeScreen.routeName,
+                  ModalRoute.withName(HomeScreen.routeName),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/logo.svg',
+                height: 40.h,
+              ),
             ),
           ),
           Expanded(
@@ -43,12 +55,24 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       actions: hasAction
           ? [
               IconButton(
-                onPressed: messageOnPressed,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    MatchesScreen.routeName,
+                    arguments: context.read<AuthBloc>().state.user,
+                  );
+                },
                 icon: const Icon(Icons.message),
                 color: Theme.of(context).primaryColor,
               ),
               IconButton(
-                onPressed: profileOnPressed,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    ProfileScreen.routeName,
+                    arguments: context.read<AuthBloc>().state.user,
+                  );
+                },
                 icon: const Icon(Icons.person),
                 color: Theme.of(context).primaryColor,
               ),
