@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../models/models.dart';
 import '/repositories/repositories.dart';
@@ -20,17 +21,36 @@ class DatabaseRepository extends BaseDatabaseRepository {
   }
 
   @override
+  Stream<List<User>> getUsersToSwipe(User user) {
+    return Rx.combineLatest2(
+      getUser(user.id!),
+      getUsers(user),
+      (
+        User curentUser,
+        List<User> users,
+      ) {
+        return users.where((user) {
+          if (curentUser.swipeLeft!.contains(user.id)) {
+            return false;
+          } else if (curentUser.swipeRight!.contains(user.id)) {
+            return false;
+          } else if (curentUser.matches!.contains(user.id)) {
+            return false;
+          } else {
+            return true;
+          }
+        }).toList();
+      },
+    );
+  }
+
+  @override
   Stream<List<User>> getUsers(
     User user,
   ) {
-    List<String> userFilter = List.from(user.swipeLeft!)
-      ..addAll(user.swipeRight!)
-      ..add(user.id!);
-
     return _firebaseFirestore
         .collection('users')
-        .where('gender', isEqualTo: 'Female')
-        // .where(FieldPath.documentId, whereNotIn: userFilter)
+        .where('gender', isEqualTo: _selectGender(user))
         .snapshots()
         .map((snap) {
       return snap.docs.map((doc) => User.fromSnapshot(doc)).toList();
@@ -39,20 +59,25 @@ class DatabaseRepository extends BaseDatabaseRepository {
 
   @override
   Stream<List<Match>> getMatches(User user) {
-    List<String> userFilter = List.from(user.matches!)..add('0');
+    return Rx.combineLatest2(
+      getUser(user.id!),
+      getUsers(user),
+      (
+        User curentUser,
+        List<User> users,
+      ) {
+        return users
+            .where((user) => curentUser.matches!.contains(user.id))
+            .map(
+              (user) => Match(
+                userId: user.id!,
+                matchedUser: user,
+              ),
+            )
+            .toList();
+      },
+    );
 
-    return _firebaseFirestore
-        .collection('users')
-        .where(FieldPath.documentId, whereIn: userFilter)
-        .snapshots()
-        .map((snap) {
-      return snap.docs
-          .map((doc) => Match.fromSnapshot(
-                doc,
-                user.id!,
-              ))
-          .toList();
-    });
   }
 
   @override
@@ -124,5 +149,9 @@ class DatabaseRepository extends BaseDatabaseRepository {
         'matches': FieldValue.arrayUnion([userId]),
       },
     );
+  }
+
+  String _selectGender(User user) {
+    return (user.gender == 'Female') ? 'Male' : 'Female';
   }
 }
