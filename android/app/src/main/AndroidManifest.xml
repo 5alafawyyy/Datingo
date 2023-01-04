@@ -4,6 +4,8 @@
         android:label="datingo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAJG-vY5i88hI6clJ3Geh2jm8titCW6QoU"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

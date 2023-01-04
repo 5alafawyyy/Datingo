@@ -35,13 +35,12 @@ class CustomButton extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () async {
-            if (tabController.index == 5) {
+            if (tabController.index == 6) {
               Navigator.pushNamed(
                 context,
                 HomeScreen.routeName,
               );
-              
-            }else{
+            } else {
               tabController.animateTo(tabController.index + 1);
             }
             if (tabController.index == 2) {
@@ -56,7 +55,7 @@ class CustomButton extends StatelessWidget {
                 interests: [],
                 bio: '',
                 jobTitle: '',
-                location: '',
+                location: Location.initialLocation,
                 swipeLeft: [],
                 swipeRight: [],
                 matches: [],

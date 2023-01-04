@@ -70,63 +70,65 @@ class Match extends Equatable {
     );
     return match;
   }
+// 
+  // static List<Match> matches = [
+  //   Match(
+  //     userId: '1',
+  //     matchedUser: User.users[1],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 2)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '2',
+  //     matchedUser: User.users[2],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 3)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '3',
+  //     matchedUser: User.users[3],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 4)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '4',
+  //     matchedUser: User.users[4],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 5)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '5',
+  //     matchedUser: User.users[5],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 6)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '6',
+  //     matchedUser: User.users[6],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 7)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '7',
+  //     matchedUser: User.users[7],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 8)
+  //     //     .toList(),
+  //   ),
+  //   Match(
+  //     userId: '8',
+  //     matchedUser: User.users[8],
+  //     // chat: Chat.chats
+  //     //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 9)
+  //     //     .toList(),
+  //   ),
+  // ];
 
-  static List<Match> matches = [
-    Match(
-      userId: '1',
-      matchedUser: User.users[1],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 2)
-      //     .toList(),
-    ),
-    Match(
-      userId: '2',
-      matchedUser: User.users[2],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 3)
-      //     .toList(),
-    ),
-    Match(
-      userId: '3',
-      matchedUser: User.users[3],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 4)
-      //     .toList(),
-    ),
-    Match(
-      userId: '4',
-      matchedUser: User.users[4],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 5)
-      //     .toList(),
-    ),
-    Match(
-      userId: '5',
-      matchedUser: User.users[5],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 6)
-      //     .toList(),
-    ),
-    Match(
-      userId: '6',
-      matchedUser: User.users[6],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 7)
-      //     .toList(),
-    ),
-    Match(
-      userId: '7',
-      matchedUser: User.users[7],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 8)
-      //     .toList(),
-    ),
-    Match(
-      userId: '8',
-      matchedUser: User.users[8],
-      // chat: Chat.chats
-      //     .where((chat) => chat.userId == 1 && chat.matchedUserId == 9)
-      //     .toList(),
-    ),
-  ];
+
 }

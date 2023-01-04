@@ -5,10 +5,10 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../../../blocs/blocs.dart';
 import '../widgets/widgets.dart';
 
-class Demographics extends StatelessWidget {
+class DemographicsTab extends StatelessWidget {
   final TabController tabController;
 
-  const Demographics({
+  const DemographicsTab({
     super.key,
     required this.tabController,
   });
@@ -38,6 +38,23 @@ class Demographics extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const CustomTextHeader(
+                        text: 'What\'s Your Name?',
+                      ),
+                      CustomTextField(
+                        hint: 'TYPE YOUR NAME',
+                        onChanged: (name) {
+                          context.read<OnboardingBloc>().add(
+                                UpdateUser(
+                                  user: state.user.copyWith(
+                                    name: name,
+                                  ),
+                                ),
+                              );
+                        },
+                        keyboardType: TextInputType.number,
+                      ),
+                      SizedBox(height: 10.0.h),
                       const CustomTextHeader(
                         text: 'What\'s Your Gender?',
                       ),

@@ -6,10 +6,10 @@ import '../../../blocs/blocs.dart';
 import '../widgets/widgets.dart';
 import '../../../widgets/widgets.dart';
 
-class Biography extends StatelessWidget {
+class BiographyTab extends StatelessWidget {
   final TabController tabController;
 
-  const Biography({
+  const BiographyTab({
     super.key,
     required this.tabController,
   });

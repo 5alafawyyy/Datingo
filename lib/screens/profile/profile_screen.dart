@@ -122,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                         const TitleWithIcon(
                             title: 'Location', icon: Icons.edit),
                         Text(
-                          state.user.location,
+                          state.user.location.name,
                           style: Theme.of(context)
                               .textTheme
                               .bodyText1!

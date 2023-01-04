@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final void Function()? onEditingComplete;
   final void Function(String)? onSubmitted;
   final TextInputType? keyboardType;
+  final Function(bool)? onFocusChanged;
+
   const CustomTextField({
     Key? key,
     required this.hint,
@@ -15,31 +17,35 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.onEditingComplete,
     this.keyboardType,
+    this.onFocusChanged,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        hintText: hint,
-        contentPadding: const EdgeInsets.only(
-          bottom: 5.0,
-          top: 12.5,
+    return Focus(
+      child: TextField(
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          hintText: hint,
+          contentPadding: const EdgeInsets.only(
+            bottom: 5.0,
+            top: 12.5,
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+          ),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
+        controller: controller,
+        onSubmitted: onSubmitted,
+        onChanged: onChanged,
+        onEditingComplete: () {},
+        keyboardType: keyboardType,
       ),
-      controller: controller,
-      onSubmitted: onSubmitted,
-      onChanged: onChanged,
-      onEditingComplete: () {},
-      keyboardType: keyboardType,
-    );
+    
+    onFocusChange: onFocusChanged ?? (hasFocus) {},);
   }
 }

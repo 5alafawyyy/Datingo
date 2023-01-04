@@ -4,10 +4,10 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../widgets/widgets.dart';
 
-class EmailVerification extends StatelessWidget {
+class EmailVerificationTab extends StatelessWidget {
   final TabController tabController;
 
-  const EmailVerification({
+  const EmailVerificationTab({
     super.key,
     required this.tabController,
   });

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import '../../../blocs/blocs.dart';
 import '../widgets/widgets.dart';
+import '../../../models/models.dart';
 
-class Location extends StatelessWidget {
+class LocationTab extends StatelessWidget {
   final TabController tabController;
 
-  const Location({
+  const LocationTab({
     super.key,
     required this.tabController,
   });
@@ -36,25 +38,65 @@ class Location extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const CustomTextHeader(
-                        text: 'Where Are You?',
-                      ),
-                      SizedBox(height: 10.0.h),
-                      CustomTextField(
-                        hint: 'ENTER YOUR LOCATION',
-                        onChanged: (location) {
-                          context.read<OnboardingBloc>().add(
-                                UpdateUser(
-                                  user: state.user.copyWith(location: location),
-                                ),
-                              );
-                        },
-                        keyboardType: TextInputType.text,
-                      ),
-                    ],
+                  SizedBox(
+                    height: 0.7.sh,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const CustomTextHeader(
+                          text: 'Where Are You?',
+                        ),
+                        SizedBox(height: 5.0.h),
+                        CustomTextField(
+                          hint: 'ENTER YOUR LOCATION',
+                          onChanged: (value) {
+                            Location location =
+                                state.user.location.copyWith(name: value);
+                           
+                            context.read<OnboardingBloc>().add(
+                                  UpdateUserLocation(
+                                    location: location,
+                                  ),
+                                );
+                          },
+                          onFocusChanged: (hasFocus) {
+                            if (hasFocus) {
+                              return;
+                            } else {
+                              context.read<OnboardingBloc>().add(
+                                    UpdateUserLocation(
+                                      isUpdateComplete: true,
+                                      location: state.user.location,
+                                    ),
+                                  );
+                            }
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                        SizedBox(height: 10.0.h),
+                        Expanded(
+                          child: GoogleMap(
+                            myLocationEnabled: true,
+                            myLocationButtonEnabled: false,
+                            onMapCreated: (GoogleMapController controller) {
+                              context.read<OnboardingBloc>().add(
+                                    UpdateUserLocation(
+                                      controller: controller,
+                                    ),
+                                  );
+                            },
+                            initialCameraPosition: CameraPosition(
+                              zoom: 10.0,
+                              target: LatLng(
+                                state.user.location.lat,
+                                state.user.location.lon,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.0.h),
+                      ],
+                    ),
                   ),
                   Column(
                     children: [

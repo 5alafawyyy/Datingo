@@ -6,10 +6,10 @@ import '../../../blocs/blocs.dart';
 import '../widgets/widgets.dart';
 import '../../../widgets/widgets.dart';
 
-class Pictures extends StatelessWidget {
+class PicturesTab extends StatelessWidget {
   final TabController tabController;
 
-  const Pictures({
+  const PicturesTab({
     super.key,
     required this.tabController,
   });

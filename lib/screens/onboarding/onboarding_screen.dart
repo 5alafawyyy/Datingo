@@ -38,13 +38,13 @@ class OnboardingScreen extends StatelessWidget {
             ),
             body: TabBarView(
               children: [
-                Start(tabController: tabController),
-                Email(tabController: tabController),
-                EmailVerification(tabController: tabController),
-                Demographics(tabController: tabController),
-                Pictures(tabController: tabController),
-                Biography(tabController: tabController),
-                Location(tabController: tabController),
+                StartTab(tabController: tabController),
+                EmailTab(tabController: tabController),
+                EmailVerificationTab(tabController: tabController),
+                DemographicsTab(tabController: tabController),
+                PicturesTab(tabController: tabController),
+                BiographyTab(tabController: tabController),
+                LocationTab(tabController: tabController),
               ],
             ),
           );

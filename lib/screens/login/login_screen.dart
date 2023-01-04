@@ -10,7 +10,7 @@ import '../../cubits/cubits.dart';
 class LoginScreen extends StatelessWidget {
   static const String routeName = '/login';
 
-  static Route route({required User user}) {
+  static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: ((context) {

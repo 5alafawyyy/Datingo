@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'onboarding_bloc.dart';
 
 abstract class OnboardingEvent extends Equatable {
@@ -20,7 +21,7 @@ class StartOnboarding extends OnboardingEvent {
       interests: [],
       bio: '',
       jobTitle: '',
-      location: '',
+      location: Location.initialLocation,
       swipeLeft: [],
       swipeRight: [],
       matches: [],
@@ -53,5 +54,24 @@ class UpdateUserImages extends OnboardingEvent {
   List<Object?> get props => [
         user,
         image,
+      ];
+}
+
+class UpdateUserLocation extends OnboardingEvent {
+  final Location? location;
+  final GoogleMapController? controller;
+  final bool isUpdateComplete;
+
+  const UpdateUserLocation({
+    this.location,
+    this.controller,
+    this.isUpdateComplete = false,
+  });
+
+  @override
+  List<Object?> get props => [
+        location,
+        controller,
+        isUpdateComplete,
       ];
 }

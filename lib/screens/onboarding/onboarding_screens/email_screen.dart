@@ -7,17 +7,16 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 import '../../../cubits/signup/signup_cubit.dart';
 import '../widgets/widgets.dart';
 
-class Email extends StatelessWidget {
+class EmailTab extends StatelessWidget {
   final TabController tabController;
 
-  const Email({
+  const EmailTab({
     super.key,
     required this.tabController,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<SignupCubit, SignupState>(
       builder: (context, state) {
         return SingleChildScrollView(
